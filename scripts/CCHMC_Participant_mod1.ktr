@@ -1356,35 +1356,27 @@
     <fields>
       <field>
         <name>CP Short Title</name>
-        <rename/>
       </field>
       <field>
         <name>PPID</name>
-        <rename/>
       </field>
       <field>
         <name>Registration Date</name>
-        <rename/>
       </field>
       <field>
         <name>Registration Site</name>
-        <rename/>
       </field>
       <field>
         <name>First Name</name>
-        <rename/>
       </field>
       <field>
         <name>Middle Name</name>
-        <rename/>
       </field>
       <field>
         <name>Last Name</name>
-        <rename/>
       </field>
       <field>
         <name>Date of Birth</name>
-        <rename/>
       </field>
       <field>
         <name>Site Name</name>
@@ -1396,7 +1388,6 @@
       </field>
       <field>
         <name>NoMoreSamplesDate</name>
-        <rename/>
       </field>
       <field>
         <name>Comments</name>
@@ -1487,46 +1478,6 @@
     </GUI>
   </step>
   <step>
-    <name>registration date nulls</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <replaceAllByValue/>
-    <replaceAllMask/>
-    <selectFields>Y</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>Registration Date</name>
-        <value>01/01/1990 00:00:00</value>
-        <mask>MM/dd/yyyy HH:mm:ss</mask>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Site Name, CP , Registration site Constant Values</name>
     <type>Constant</type>
     <description/>
@@ -1585,6 +1536,46 @@
     </remotesteps>
     <GUI>
       <xloc>448</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>registration date nulls</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>Registration Date</name>
+        <value>01/01/1990 00:00:00</value>
+        <mask>MM/dd/yyyy HH:mm:ss</mask>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>

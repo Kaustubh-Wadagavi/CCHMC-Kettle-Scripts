@@ -437,53 +437,73 @@
   </notepads>
   <order>
     <hop>
-      <from>CP Short Title, Event Label values</from>
-      <to>visit name</to>
+      <from>Set CP title and event label</from>
+      <to>Creating visit name</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 2</from>
-      <to>CP Short Title, Event Label values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Stream lookup specimen timepoint</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>cSpecimenTimepoint input</from>
-      <to>Stream lookup specimen timepoint</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sample input</from>
-      <to>Stream lookup specimen timepoint</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sort visit name</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>visit name</from>
+      <from>Creating visit name</from>
       <to>sort visit name</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Removing dash from date</from>
-      <to>new visit output</to>
+      <from>Select values </from>
+      <to>Removing dash from date</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
-      <to>Removing dash from date</to>
+      <from>Select specimen values </from>
+      <to>Sort UPN and Timepoint</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort UPN and Timepoint</from>
+      <to>Group UPNs, Timepoint, Freeze Date</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort UPN and Timepoint</from>
+      <to>Group UPNs, Timepoint, Freeze Date</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Group UPNs, Timepoint, Freeze Date</from>
+      <to>Sort visit dates</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort visit dates</from>
+      <to>Set CP title and event label</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Specimen Input</from>
+      <to>Select specimen values </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Timepoint input</from>
+      <to>lookup timepoint</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sort visit name</from>
+      <to>lookup timepoint</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup timepoint</from>
+      <to>Select values </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Removing dash from date</from>
+      <to>visit output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>CP Short Title, Event Label values</name>
+    <name>Set CP title and event label</name>
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
@@ -528,8 +548,54 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>493</xloc>
-      <yloc>293</yloc>
+      <xloc>464</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Group UPNs, Timepoint, Freeze Date</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>UPN</name>
+      </field>
+      <field>
+        <name>SpecimenTimepoint</name>
+      </field>
+      <field>
+        <name>FreezeDate</name>
+      </field>
+    </group>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -567,13 +633,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>1200</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
+    <name>Select values </name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -597,16 +663,16 @@
         <rename/>
       </field>
       <field>
-        <name>spectimepoint</name>
-        <rename>Clinical Status</rename>
-      </field>
-      <field>
         <name>Name</name>
         <rename/>
       </field>
       <field>
         <name>FreezeDate</name>
         <rename/>
+      </field>
+      <field>
+        <name>specimenpoint</name>
+        <rename>Clinical Status</rename>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -653,13 +719,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>781</xloc>
-      <yloc>53</yloc>
+      <xloc>1200</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 2</name>
+    <name>Select specimen values </name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -738,10 +804,6 @@
         <name>DestructionReason</name>
         <rename/>
       </field>
-      <field>
-        <name>spectimepoint</name>
-        <rename/>
-      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
@@ -753,14 +815,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>189</xloc>
-      <yloc>293</yloc>
+      <xloc>176</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Stream lookup specimen timepoint</name>
-    <type>StreamLookup</type>
+    <name>Sort UPN and Timepoint</name>
+    <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -769,84 +831,29 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>cSpecimenTimepoint input</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>SpecimenTimepoint</name>
-        <field>Code</field>
-      </key>
-      <value>
-        <name>Description</name>
-        <rename>spectimepoint</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>189</xloc>
-      <yloc>181</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>cSpecimenTimepoint input</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>/home/krishagni/Desktop/cchmc/input/cSpecimenTimepoint.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>,</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>Code</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
+        <name>UPN</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
       <field>
-        <name>Description</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>46</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <name>SpecimenTimepoint</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <attributes/>
@@ -858,13 +865,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>301</xloc>
-      <yloc>53</yloc>
+      <xloc>176</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>new visit output</name>
+    <name>visit output</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -967,7 +974,7 @@
       </field>
       <field>
         <name>Clinical Status</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -987,13 +994,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>288</yloc>
+      <xloc>1200</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>sample input</name>
+    <name>Specimen Input</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1226,7 +1233,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
+      <xloc>176</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1268,13 +1275,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>493</xloc>
-      <yloc>53</yloc>
+      <xloc>720</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>visit name</name>
+    <name>Creating visit name</name>
     <type>ConcatFields</type>
     <description/>
     <distribute>N</distribute>
@@ -1366,8 +1373,155 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>493</xloc>
-      <yloc>181</yloc>
+      <xloc>720</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort visit dates</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>FreezeDate</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup timepoint</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Timepoint input</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>SpecimenTimepoint</name>
+        <field>Code</field>
+      </key>
+      <value>
+        <name>Description</name>
+        <rename>specimenpoint</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Timepoint input</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>/home/krishagni/Desktop/cchmc/input/cSpecimenTimepoint.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>Code</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Description</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>46</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
