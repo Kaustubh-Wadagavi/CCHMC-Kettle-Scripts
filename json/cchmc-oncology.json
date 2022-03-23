@@ -173,24 +173,6 @@
            "optional": false
          },
          {
-          "name": "visit.extensionDetail.attrsMap.time_point_course",
-          "caption": "Time Point Course",
-          "type": "text",
-          "optional": true
-          },
-          {
-            "name": "visit.extensionDetail.attrsMap.time_point_day",
-            "caption": "Time Point Day",
-            "type": "text",
-            "optional": true
-          },
-          {
-            "name": "visit.extensionDetail.attrsMap.time_point_months_since_end_of_therapy",
-            "caption": "Time Point Months Since End of Therapy",
-            "type": "text",
-            "optional": true
-          },
-         {
            "name": "specimen.label",
            "caption": "Label",
            "type": "text",
@@ -491,6 +473,24 @@
            "caption": "Frozen Comments",
            "type": "textarea"
          },
+         {
+          "name": "specimen.extensionDetail.attrsMap.time_point_course",
+          "caption": "Time Point Course",
+          "type": "text",
+          "optional": true
+          },
+          {
+            "name": "specimen.extensionDetail.attrsMap.time_point_day",
+            "caption": "Time Point Day",
+            "type": "text",
+            "optional": true
+          },
+          {
+            "name": "specimen.extensionDetail.attrsMap.time_point_months_since_end_of_therapy",
+            "caption": "Time Point Months Since End of Therapy",
+            "type": "text",
+            "optional": true
+          },
          {
           "name":"specimen.extensionDetail.attrsMap.percent_circulating_blasts",
           "caption": "Circulating Blasts (%)",
