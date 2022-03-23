@@ -437,28 +437,33 @@
   </notepads>
   <order>
     <hop>
-      <from>Stream lookup spec</from>
-      <to>combine</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sample input</from>
-      <to>Stream lookup spec</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>cSpecimenTimepoint input</from>
-      <to>Stream lookup spec</to>
+      <from>CP Short Title, Event Label values</from>
+      <to>visit name</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Select values 2</from>
-      <to>CP Short Title</to>
+      <to>CP Short Title, Event Label values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CP Short Title</from>
-      <to>visit name</to>
+      <from>Stream lookup specimen timepoint</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>cSpecimenTimepoint input</from>
+      <to>Stream lookup specimen timepoint</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sample input</from>
+      <to>Stream lookup specimen timepoint</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sort visit name</from>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -467,28 +472,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>combine</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sort visit name</from>
-      <to>Replace in string</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
+      <from>Removing dash from date</from>
       <to>new visit output</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Replace in string</from>
-      <to>Select values</to>
+      <from>Select values</from>
+      <to>Removing dash from date</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>CP Short Title</name>
+    <name>CP Short Title, Event Label values</name>
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
@@ -506,7 +501,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Oncology</nullif>
+        <nullif>Oncology_1</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -523,18 +518,6 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
-      <field>
-        <name>tp</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>tp</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -545,13 +528,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
-      <yloc>272</yloc>
+      <xloc>493</xloc>
+      <yloc>293</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Replace in string</name>
+    <name>Removing dash from date</name>
     <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
@@ -563,35 +546,11 @@
     </partitioning>
     <fields>
       <field>
-        <in_stream_name>MRN</in_stream_name>
+        <in_stream_name>Name</in_stream_name>
         <out_stream_name/>
-        <use_regex>yes</use_regex>
-        <replace_string>(^\d{6}$)</replace_string>
-        <replace_by_string>000$1</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>MRN</in_stream_name>
-        <out_stream_name/>
-        <use_regex>yes</use_regex>
-        <replace_string>(^\d{7}$)</replace_string>
-        <replace_by_string>00$1</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>MRN</in_stream_name>
-        <out_stream_name/>
-        <use_regex>yes</use_regex>
-        <replace_string>(^\d{8}$)</replace_string>
-        <replace_by_string>0$1</replace_by_string>
+        <use_regex>no</use_regex>
+        <replace_string>-</replace_string>
+        <replace_by_string/>
         <set_empty_string>N</set_empty_string>
         <replace_field_by_string/>
         <whole_word>no</whole_word>
@@ -608,8 +567,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>272</yloc>
+      <xloc>784</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -626,12 +585,12 @@
     </partitioning>
     <fields>
       <field>
-        <name>CP Short Title</name>
-        <rename/>
+        <name>UPN</name>
+        <rename>PPID</rename>
       </field>
       <field>
-        <name>MRN</name>
-        <rename>PPID</rename>
+        <name>CP Short Title</name>
+        <rename/>
       </field>
       <field>
         <name>Event Label</name>
@@ -649,32 +608,7 @@
         <name>FreezeDate</name>
         <rename/>
       </field>
-      <field>
-        <name>Clinical Diagnosis</name>
-        <rename>Clinical Diagnosis#1</rename>
-      </field>
-      <field>
-        <name>DiagnosisDate</name>
-        <rename>Visit_customform#Diagnosis Date</rename>
-      </field>
       <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>Visit_customform#Diagnosis Date</name>
-        <rename>Visit_customform#Diagnosis Date</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM-dd-yyyy</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
       <meta>
         <name>FreezeDate</name>
         <rename>Visit Date</rename>
@@ -695,10 +629,10 @@
       <meta>
         <name>PPID</name>
         <rename>PPID</rename>
-        <type>String</type>
-        <length>-2</length>
+        <type>Number</type>
+        <length>5</length>
         <precision>-2</precision>
-        <conversion_mask>000000000</conversion_mask>
+        <conversion_mask/>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -719,8 +653,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
-      <yloc>272</yloc>
+      <xloc>781</xloc>
+      <yloc>53</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -738,85 +672,77 @@
     <fields>
       <field>
         <name>SampNum</name>
+        <rename/>
       </field>
       <field>
         <name>UPN</name>
-      </field>
-      <field>
-        <name>MRN</name>
+        <rename/>
       </field>
       <field>
         <name>SampSource</name>
+        <rename/>
       </field>
       <field>
         <name>SpecimenTimepoint</name>
+        <rename/>
       </field>
       <field>
         <name>SampleAccessionNum</name>
+        <rename/>
       </field>
       <field>
         <name>PercentCirculatingBlasts</name>
+        <rename/>
       </field>
       <field>
         <name>PercentBMBlasts</name>
+        <rename/>
       </field>
       <field>
         <name>ViabilityPercent</name>
+        <rename/>
       </field>
       <field>
         <name>TimepointCourse</name>
+        <rename/>
       </field>
       <field>
         <name>TimepointDay</name>
+        <rename/>
       </field>
       <field>
         <name>TimepointMonthsSinceEndofTherapy</name>
+        <rename/>
       </field>
       <field>
         <name>FreezeDate</name>
+        <rename/>
       </field>
       <field>
         <name>FreezeTime</name>
+        <rename/>
       </field>
       <field>
         <name>Conc</name>
+        <rename/>
       </field>
       <field>
         <name>Comments</name>
+        <rename/>
       </field>
       <field>
         <name>DateofDestruction</name>
+        <rename/>
       </field>
       <field>
         <name>DestructionReason</name>
+        <rename/>
       </field>
       <field>
         <name>spectimepoint</name>
-      </field>
-      <field>
-        <name>Clinical Diagnosis</name>
-      </field>
-      <field>
-        <name>DiagnosisDate</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>DiagnosisDate</name>
-        <rename>DiagnosisDate</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -827,13 +753,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
-      <yloc>272</yloc>
+      <xloc>189</xloc>
+      <yloc>293</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Stream lookup spec</name>
+    <name>Stream lookup specimen timepoint</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -869,8 +795,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
-      <yloc>48</yloc>
+      <xloc>189</xloc>
+      <yloc>181</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -932,56 +858,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>combine</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from/>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>UPN</name>
-        <field>UPN</field>
-      </key>
-      <value>
-        <name>diag</name>
-        <rename>Clinical Diagnosis</rename>
-        <default/>
-        <type>String</type>
-      </value>
-      <value>
-        <name>MRN</name>
-        <rename>MRN</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>160</yloc>
+      <xloc>301</xloc>
+      <yloc>53</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1041,8 +919,8 @@
       </field>
       <field>
         <name>PPID</name>
-        <type>String</type>
-        <format/>
+        <type>Integer</type>
+        <format>00000</format>
         <currency/>
         <decimal/>
         <group/>
@@ -1088,33 +966,9 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>Clinical Diagnosis#1</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
         <name>Clinical Status</name>
         <type>None</type>
         <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Visit_customform#Diagnosis Date</name>
-        <type>Date</type>
-        <format>MM-dd-yyyy</format>
         <currency/>
         <decimal/>
         <group/>
@@ -1133,8 +987,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
-      <yloc>48</yloc>
+      <xloc>784</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1167,54 +1021,54 @@
       <field>
         <name>SampNum</name>
         <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>UPN</name>
         <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>SampSource</name>
         <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>SpecimenTimepoint</name>
         <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>SampleAccessionNum</name>
         <type>Boolean</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1223,9 +1077,9 @@
         <name>PercentCirculatingBlasts</name>
         <type>Boolean</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1233,21 +1087,21 @@
       <field>
         <name>PercentBMBlasts</name>
         <type>Number</type>
-        <format>#.#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>5</length>
-        <precision>2</precision>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>ViabilityPercent</name>
         <type>Boolean</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1256,31 +1110,31 @@
         <name>TimepointCourse</name>
         <type>String</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>18</length>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>TimepointDay</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>TimepointMonthsSinceEndofTherapy</name>
         <type>Boolean</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1289,9 +1143,9 @@
         <name>FreezeDate</name>
         <type>Date</type>
         <format>MM/dd/yyyy HH:mm:ss</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1300,9 +1154,9 @@
         <name>FreezeTime</name>
         <type>String</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1310,22 +1164,22 @@
       <field>
         <name>Conc</name>
         <type>Number</type>
-        <format>#.#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>7</length>
-        <precision>2</precision>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>Comments</name>
         <type>String</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>96</length>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1333,9 +1187,9 @@
         <name>DateofDestruction</name>
         <type>Date</type>
         <format>MM/dd/yyyy HH:mm:ss</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1344,9 +1198,9 @@
         <name>DestructionReason</name>
         <type>String</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1355,9 +1209,9 @@
         <name>upsize_ts</name>
         <type>Boolean</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1372,7 +1226,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
+      <xloc>96</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1414,8 +1268,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>160</yloc>
+      <xloc>493</xloc>
+      <yloc>53</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1474,18 +1328,6 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>tp</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
         <name>SpecimenTimepoint</name>
         <type>Integer</type>
         <format>00</format>
@@ -1495,6 +1337,18 @@
         <nullif>XX</nullif>
         <trim_type>none</trim_type>
         <length>2</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FreezeDate</name>
+        <type>Date</type>
+        <format>MM-dd-yyyy</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
     </fields>
@@ -1512,8 +1366,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
-      <yloc>160</yloc>
+      <xloc>493</xloc>
+      <yloc>181</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
