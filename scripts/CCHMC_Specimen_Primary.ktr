@@ -443,17 +443,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sample input</from>
-      <to>Type lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Type lookup</from>
-      <to>SpecLab lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SpecLab lookup</from>
+      <from>UPN PPID lookup</from>
       <to>Add constants</to>
       <enabled>Y</enabled>
     </hop>
@@ -469,22 +459,37 @@
     </hop>
     <hop>
       <from>visit output input</from>
-      <to>SpecLab lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>coll date mod</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>coll date mod</from>
-      <to>Select values 2</to>
+      <to>UPN PPID lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Specimen Label</from>
       <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Type lookup</from>
+      <to>UPN PPID lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sample input</from>
+      <to>Replacing empty on Freeze date and Freeze time</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Replacing empty on Freeze date and Freeze time</from>
+      <to>Type lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Concat fields</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Concat fields</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -524,17 +529,166 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Concat fields</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator> </separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
       <field>
-        <name>tp</name>
+        <name>d1</name>
         <type>String</type>
-        <format/>
+        <format>MM/dd/yyyy HH:mm:ss</format>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>tp</nullif>
+        <nullif/>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
+      </field>
+      <field>
+        <name>t1</name>
+        <type>String</type>
+        <format>HH:mm:ss.SSS</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>d1</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Replacing empty on Freeze date and Freeze time</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>FreezeDate</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>0:00:00</replace_string>
+        <replace_by_string/>
         <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>FreezeTime</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>12/30/1899</replace_string>
+        <replace_by_string/>
+        <set_empty_string>Y</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>FreezeDate</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>/</replace_string>
+        <replace_by_string>-</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>FreezeTime</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>/</replace_string>
+        <replace_by_string>-</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
       </field>
     </fields>
     <attributes/>
@@ -546,8 +700,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>16</yloc>
+      <xloc>64</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -562,7 +716,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/krishagni/Desktop/cchmc/input/tblSamples.csv</filename>
+    <filename>/home/krishagni/Desktop/cchmc/testing/primary-specimens.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -634,35 +788,35 @@
       </field>
       <field>
         <name>PercentCirculatingBlasts</name>
-        <type>Boolean</type>
-        <format/>
+        <type>Integer</type>
+        <format>#</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>PercentBMBlasts</name>
-        <type>Number</type>
-        <format>#.#</format>
+        <type>Integer</type>
+        <format>#</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
-        <precision>2</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>ViabilityPercent</name>
-        <type>Boolean</type>
-        <format/>
+        <type>Integer</type>
+        <format>#</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -700,7 +854,7 @@
       </field>
       <field>
         <name>FreezeDate</name>
-        <type>Date</type>
+        <type>String</type>
         <format>MM/dd/yyyy HH:mm:ss</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -711,8 +865,8 @@
       </field>
       <field>
         <name>FreezeTime</name>
-        <type>Boolean</type>
-        <format/>
+        <type>String</type>
+        <format>MM/dd/yyyy HH:mm:ss</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -727,8 +881,8 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
-        <precision>2</precision>
+        <length>3</length>
+        <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -738,14 +892,14 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>96</length>
+        <length>100</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>DateofDestruction</name>
-        <type>Boolean</type>
-        <format/>
+        <type>Date</type>
+        <format>MM/dd/yyyy HH:mm:ss</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -755,12 +909,12 @@
       </field>
       <field>
         <name>DestructionReason</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>29</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -794,7 +948,7 @@
     <name>Select values</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -803,23 +957,47 @@
     </partitioning>
     <fields>
       <field>
-        <name>CP Short Title</name>
+        <name>SampNum</name>
         <rename/>
       </field>
       <field>
-        <name>Visit Name</name>
+        <name>UPN</name>
         <rename/>
       </field>
       <field>
-        <name>Specimen Label</name>
+        <name>SampSource</name>
         <rename/>
       </field>
       <field>
-        <name>Type</name>
+        <name>SpecimenTimepoint</name>
         <rename/>
       </field>
       <field>
-        <name>Lineage</name>
+        <name>SampleAccessionNum</name>
+        <rename/>
+      </field>
+      <field>
+        <name>PercentCirculatingBlasts</name>
+        <rename/>
+      </field>
+      <field>
+        <name>PercentBMBlasts</name>
+        <rename/>
+      </field>
+      <field>
+        <name>ViabilityPercent</name>
+        <rename/>
+      </field>
+      <field>
+        <name>TimepointCourse</name>
+        <rename/>
+      </field>
+      <field>
+        <name>TimepointDay</name>
+        <rename/>
+      </field>
+      <field>
+        <name>TimepointMonthsSinceEndofTherapy</name>
         <rename/>
       </field>
       <field>
@@ -832,44 +1010,52 @@
       </field>
       <field>
         <name>Conc</name>
-        <rename>Concentration</rename>
+        <rename/>
       </field>
       <field>
         <name>Comments</name>
         <rename/>
       </field>
       <field>
-        <name>PercentCirculatingBlasts</name>
-        <rename>Specimen_customform#PercentCirculatingBlasts</rename>
-      </field>
-      <field>
-        <name>PercentBMBlasts</name>
-        <rename>Specimen_customform#PercentBMBlasts</rename>
-      </field>
-      <field>
-        <name>ViabilityPercent</name>
-        <rename>Specimen_customform#ViabilityPercent</rename>
-      </field>
-      <field>
         <name>DateofDestruction</name>
-        <rename>Specimen_customform#Date of Destruction</rename>
+        <rename/>
       </field>
       <field>
         <name>DestructionReason</name>
-        <rename>Specimen_customform#Destruction Reason</rename>
+        <rename/>
       </field>
       <field>
-        <name>SampNum</name>
+        <name>upsize_ts</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Type</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Visit Name</name>
+        <rename/>
+      </field>
+      <field>
+        <name>CP Short Title</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Lineage</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Specimen Label</name>
         <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
         <name>FreezeDate</name>
         <rename>d1</rename>
-        <type>Date</type>
+        <type>String</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
+        <conversion_mask>MM-dd-yyyy HH:mm:ss</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -883,27 +1069,10 @@
       <meta>
         <name>FreezeTime</name>
         <rename>t1</rename>
-        <type>Timestamp</type>
+        <type>String</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>Specimen_customform#Date of Destruction</name>
-        <rename>Specimen_customform#Date of Destruction</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
+        <conversion_mask>MM-dd-yyyy HH:mm:ss</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -924,8 +1093,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>128</yloc>
+      <xloc>480</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -943,58 +1112,80 @@
     <fields>
       <field>
         <name>CP Short Title</name>
+        <rename/>
       </field>
       <field>
         <name>Visit Name</name>
+        <rename/>
+      </field>
+      <field>
+        <name>SampSource</name>
+        <rename/>
       </field>
       <field>
         <name>Specimen Label</name>
+        <rename/>
       </field>
       <field>
         <name>Type</name>
+        <rename/>
       </field>
       <field>
         <name>Lineage</name>
+        <rename/>
       </field>
       <field>
-        <name>Concentration</name>
+        <name>Conc</name>
+        <rename/>
       </field>
       <field>
         <name>Comments</name>
+        <rename/>
       </field>
       <field>
-        <name>col</name>
+        <name>d1</name>
         <rename>Collection Event#Date and Time</rename>
       </field>
       <field>
-        <name>Specimen_customform#PercentCirculatingBlasts</name>
+        <name>TimepointDay</name>
+        <rename>Specimen_customform#Time Point Day</rename>
+      </field>
+      <field>
+        <name>TimepointCourse</name>
+        <rename>Specimen_customform#Time Point Course</rename>
+      </field>
+      <field>
+        <name>TimepointMonthsSinceEndofTherapy</name>
+        <rename>Specimen_customform#Time Point Months Since End of Therapy</rename>
+      </field>
+      <field>
+        <name>PercentCirculatingBlasts</name>
         <rename>Specimen_customform#Circulating Blasts (%)</rename>
       </field>
       <field>
-        <name>Specimen_customform#PercentBMBlasts</name>
+        <name>PercentBMBlasts</name>
         <rename>Specimen_customform#BM Blasts (%)</rename>
       </field>
       <field>
-        <name>Specimen_customform#ViabilityPercent</name>
+        <name>ViabilityPercent</name>
         <rename>Specimen_customform#Viability (%)</rename>
       </field>
       <field>
-        <name>Specimen_customform#Date of Destruction</name>
+        <name>DateofDestruction</name>
+        <rename>Specimen_customform#Date of Destruction</rename>
       </field>
       <field>
-        <name>Specimen_customform#Destruction Reason</name>
-      </field>
-      <field>
-        <name>SampNum</name>
+        <name>DestructionReason</name>
+        <rename>Specimen_customform#Destruction Reason</rename>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
-        <name>Collection Event#Date and Time</name>
-        <rename>Collection Event#Date and Time</rename>
-        <type>Date</type>
+        <name>Specimen_customform#Date of Destruction</name>
+        <rename>Specimen_customform#Date of Destruction</rename>
+        <type>String</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>MM-dd-yyyy HH:mm:ss</conversion_mask>
+        <conversion_mask>MM-dd-yyyy</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -1006,13 +1197,13 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>Specimen_customform#Date of Destruction</name>
-        <rename>Specimen_customform#Date of Destruction</rename>
-        <type>Date</type>
+        <name>Collection Event#Date and Time</name>
+        <rename>Collection Event#Date and Time</rename>
+        <type>String</type>
         <length>-2</length>
         <precision>-2</precision>
-        <conversion_mask>MM-dd-yyyy</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
+        <conversion_mask>MM-dd-yyyy HH:mm:ss</conversion_mask>
+        <date_format_lenient>true</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
         <lenient_string_to_number>false</lenient_string_to_number>
@@ -1032,50 +1223,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SpecLab lookup</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>visit output input</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>UPN</name>
-        <field>PPID</field>
-      </key>
-      <value>
-        <name>Name</name>
-        <rename>Visit Name</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>224</xloc>
-      <yloc>128</yloc>
+      <xloc>688</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1083,7 +1232,7 @@
     <name>Specimen Label</name>
     <type>ConcatFields</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1160,8 +1309,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>16</yloc>
+      <xloc>480</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1215,7 +1364,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1227,8 +1376,20 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>11</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SampSource</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -1239,8 +1400,8 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>20</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -1251,8 +1412,8 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>32</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -1263,21 +1424,21 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Concentration</name>
+        <name>Conc</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format>0.#####</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>7</length>
-        <precision>2</precision>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>Comments</name>
@@ -1287,8 +1448,8 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>96</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -1299,55 +1460,91 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Specimen_customform#Time Point Day</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Specimen_customform#Time Point Course</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Specimen_customform#Time Point Months Since End of Therapy</name>
+        <type>Boolean</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>Specimen_customform#Circulating Blasts (%)</name>
-        <type>Number</type>
-        <format>000.00</format>
+        <type>Integer</type>
+        <format>0</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>Specimen_customform#BM Blasts (%)</name>
-        <type>Number</type>
-        <format>000.00</format>
+        <type>Integer</type>
+        <format>0</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>5</length>
-        <precision>2</precision>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>Specimen_customform#Viability (%)</name>
-        <type>Number</type>
-        <format>000.00</format>
+        <type>Integer</type>
+        <format>0</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>Specimen_customform#Date of Destruction</name>
-        <type>Date</type>
-        <format>MM-dd-yyyy</format>
+        <type>String</type>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1359,21 +1556,9 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
-      </field>
-      <field>
-        <name>SampNum</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
       </field>
     </fields>
     <attributes/>
@@ -1385,8 +1570,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>16</yloc>
+      <xloc>688</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1428,7 +1613,49 @@
     </remotesteps>
     <GUI>
       <xloc>64</xloc>
-      <yloc>128</yloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>UPN PPID lookup</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>visit output input</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>UPN</name>
+        <field>PPID</field>
+      </key>
+      <value>
+        <name>Name</name>
+        <rename>Visit Name</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1502,166 +1729,7 @@
     </remotesteps>
     <GUI>
       <xloc>64</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>coll date mod</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var date = date2str(d1,"MM-dd-yyyy");
-var time = date2str(t1, "HH:mm:ss");
-var col;
-if (time == null) {
-	col = date + " 00:00:00";
-}
-else {
-	col = date +" "+ time;
-}</jsScript_script>
-      </jsScript>
-      <jsScript>
-        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>str2date_Sample</jsScript_name>
-        <jsScript_script>// Converts the given String to a date Value.
-//
-// Usage:
-// str2date(var);
-// 1: String - The Variable with the String to convert.
-// This call uses your localized format.
-//
-// str2date(var, var);
-// 1: String - The Variable with the String to convert.
-// 2: String - The Format:
-//        yy / yyyy - 06 / 2006
-//        MM / MMM / MMMMM - 11 / Nov / November
-//        d / dd  - 1 / 01
-//        E / EEEE - Tue / Tuesday
-//        hh / HH - 11 / 23
-//        m / mm - 5 / 05
-//        s / ss - 8 / 08
-//
-// str2date(var, var, var);
-// 1: String - The Variable with the String to convert.
-// 2: String - The Format:
-// 3: String - The Locale Parameter
-//    An valid ISO Language Code. (DE = German, EN = English, FR = France, ...)
-//
-// str2date(var, var, var, var);
-// 1: String - The Variable with the String to convert.
-// 2: String - The Format:
-// 3: String - The Locale Parameter
-//    An valid ISO Language Code. (DE = German, EN = English, FR = France, ...)
-// 4: String - The Timezone Parameter.
-//    A valid timezone: EST, GMT, ... (if invalid GMT will be selected as default)
-// 
-// 2006-11-15
-//
-Alert(str2date("01.12.2006","dd.MM.yyyy"));
-Alert(str2date("01.12.2006 23:23:01","dd.MM.yyyy HH:mm:ss"));
-Alert(str2date("Tue.May.2006","E.MMM.yyyy","EN"));
-Alert(str2date("22.02.2008 23:23:01","dd.MM.yyyy HH:mm:ss","DE"));
-Alert(str2date("22.02.2008 23:23:01","dd.MM.yyyy HH:mm:ss","DE", "EST"));</jsScript_script>
-      </jsScript>
-      <jsScript>
-        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>date2str_Sample</jsScript_name>
-        <jsScript_script>// Converts the given Date to a string Value.
-//
-// Usage:
-// date2str(var);
-// 1: Date - The Variable with the Date to convert.
-// This call uses your localized format.
-//
-// date2str(var, var);
-// 1: Date - The Variable with the Date to convert.
-// 2: String - The Format:
-//        yy / yyyy - 06 / 2006
-//        MM / MMM / MMMMM - 11 / Nov / November
-//        d / dd  - 1 / 01
-//        E / EEEE - Tue / Tuesday
-//        hh / HH - 11 / 23
-//        m / mm - 5 / 05
-//        s / ss - 8 / 08
-//
-// date2str(var, var, var);
-// 1: Date - The Variable with the Date to convert.
-// 2: String - The Format:
-// 3: String - The Locale Parameter
-//    A valid ISO Language Code. (DE = German, EN = English, FR = France, ...)
-//
-// date2str(var, var, var, var);
-// 1: Date - The Variable with the Date to convert.
-// 2: String - The Format:
-// 3: String - The Locale Parameter
-//    A valid ISO Language Code. (DE = German, EN = English, FR = France, ...)
-// 4: String - The Timezone Parameter.
-//    A valid timezone: EST, GMT, ... (if invalid GMT will be selected as default)
-// 
-// 2006-11-15
-//
-var dValue = new Date();
-Alert(date2str(dValue));
-Alert(date2str(dValue,"dd.MM.yyyy"));
-Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss"));
-Alert(date2str(dValue,"E.MMM.yyyy","DE"));
-Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN"));
-Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
-     </jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>date</name>
-        <rename>date</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>time</name>
-        <rename>time</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>col</name>
-        <rename>col</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>240</yloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1800,8 +1868,8 @@ Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>240</yloc>
+      <xloc>304</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
