@@ -716,7 +716,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/krishagni/Desktop/cchmc/testing/primary-specimens.csv</filename>
+    <filename>/home/krishagni/Desktop/cchmc/input/tblSamples.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -788,35 +788,35 @@
       </field>
       <field>
         <name>PercentCirculatingBlasts</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>Boolean</type>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>PercentBMBlasts</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>Number</type>
+        <format>#.#</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <length>5</length>
+        <precision>2</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>ViabilityPercent</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>Boolean</type>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -832,7 +832,7 @@
       </field>
       <field>
         <name>TimepointDay</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>#</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -866,7 +866,7 @@
       <field>
         <name>FreezeTime</name>
         <type>String</type>
-        <format>MM/dd/yyyy HH:mm:ss</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -881,8 +881,8 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>3</length>
-        <precision>1</precision>
+        <length>7</length>
+        <precision>2</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -892,7 +892,7 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>100</length>
+        <length>96</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -914,7 +914,7 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>29</length>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1182,7 +1182,7 @@
       <meta>
         <name>Specimen_customform#Date of Destruction</name>
         <rename>Specimen_customform#Date of Destruction</rename>
-        <type>String</type>
+        <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
         <conversion_mask>MM-dd-yyyy</conversion_mask>
@@ -1383,7 +1383,7 @@
       <field>
         <name>SampSource</name>
         <type>Integer</type>
-        <format>0</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1466,8 +1466,8 @@
       </field>
       <field>
         <name>Specimen_customform#Time Point Day</name>
-        <type>Integer</type>
-        <format>0</format>
+        <type>String</type>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1503,7 +1503,7 @@
       <field>
         <name>Specimen_customform#Circulating Blasts (%)</name>
         <type>Integer</type>
-        <format>0</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1515,7 +1515,7 @@
       <field>
         <name>Specimen_customform#BM Blasts (%)</name>
         <type>Integer</type>
-        <format>0</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1527,7 +1527,7 @@
       <field>
         <name>Specimen_customform#Viability (%)</name>
         <type>Integer</type>
-        <format>0</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1538,8 +1538,8 @@
       </field>
       <field>
         <name>Specimen_customform#Date of Destruction</name>
-        <type>String</type>
-        <format/>
+        <type>Date</type>
+        <format>MM/dd/yyyy</format>
         <currency/>
         <decimal/>
         <group/>

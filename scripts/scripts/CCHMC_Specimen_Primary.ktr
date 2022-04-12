@@ -898,8 +898,8 @@
       </field>
       <field>
         <name>DateofDestruction</name>
-        <type>Boolean</type>
-        <format/>
+        <type>Date</type>
+        <format>MM/dd/yyyy HH:mm:ss</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -909,7 +909,7 @@
       </field>
       <field>
         <name>DestructionReason</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -958,72 +958,95 @@
     <fields>
       <field>
         <name>SampNum</name>
+        <rename/>
       </field>
       <field>
         <name>UPN</name>
+        <rename/>
       </field>
       <field>
         <name>SampSource</name>
+        <rename/>
       </field>
       <field>
         <name>SpecimenTimepoint</name>
+        <rename/>
       </field>
       <field>
         <name>SampleAccessionNum</name>
+        <rename/>
       </field>
       <field>
         <name>PercentCirculatingBlasts</name>
+        <rename/>
       </field>
       <field>
         <name>PercentBMBlasts</name>
+        <rename/>
       </field>
       <field>
         <name>ViabilityPercent</name>
+        <rename/>
       </field>
       <field>
         <name>TimepointCourse</name>
+        <rename/>
       </field>
       <field>
         <name>TimepointDay</name>
+        <rename/>
       </field>
       <field>
         <name>TimepointMonthsSinceEndofTherapy</name>
+        <rename/>
       </field>
       <field>
         <name>FreezeDate</name>
+        <rename/>
       </field>
       <field>
         <name>FreezeTime</name>
+        <rename/>
       </field>
       <field>
         <name>Conc</name>
+        <rename/>
       </field>
       <field>
         <name>Comments</name>
+        <rename/>
       </field>
       <field>
         <name>DateofDestruction</name>
+        <rename/>
       </field>
       <field>
         <name>DestructionReason</name>
+        <rename/>
       </field>
       <field>
         <name>upsize_ts</name>
+        <rename/>
       </field>
       <field>
         <name>Type</name>
+        <rename/>
       </field>
       <field>
         <name>Visit Name</name>
+        <rename/>
       </field>
       <field>
         <name>CP Short Title</name>
+        <rename/>
       </field>
       <field>
         <name>Lineage</name>
+        <rename/>
       </field>
       <field>
         <name>Specimen Label</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1089,27 +1112,35 @@
     <fields>
       <field>
         <name>CP Short Title</name>
+        <rename/>
       </field>
       <field>
         <name>Visit Name</name>
+        <rename/>
       </field>
       <field>
         <name>SampSource</name>
+        <rename/>
       </field>
       <field>
         <name>Specimen Label</name>
+        <rename/>
       </field>
       <field>
         <name>Type</name>
+        <rename/>
       </field>
       <field>
         <name>Lineage</name>
+        <rename/>
       </field>
       <field>
         <name>Conc</name>
+        <rename/>
       </field>
       <field>
         <name>Comments</name>
+        <rename/>
       </field>
       <field>
         <name>d1</name>
@@ -1151,7 +1182,7 @@
       <meta>
         <name>Specimen_customform#Date of Destruction</name>
         <rename>Specimen_customform#Date of Destruction</rename>
-        <type>String</type>
+        <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
         <conversion_mask>MM-dd-yyyy</conversion_mask>
@@ -1507,8 +1538,8 @@
       </field>
       <field>
         <name>Specimen_customform#Date of Destruction</name>
-        <type>String</type>
-        <format/>
+        <type>Date</type>
+        <format>MM/dd/yyyy</format>
         <currency/>
         <decimal/>
         <group/>
