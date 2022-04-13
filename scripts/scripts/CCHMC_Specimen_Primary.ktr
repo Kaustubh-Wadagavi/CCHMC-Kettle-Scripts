@@ -1151,6 +1151,10 @@
         <name>DestructionReason</name>
         <rename>Specimen_customform#Destruction Reason</rename>
       </field>
+      <field>
+        <name>SampNum</name>
+        <rename/>
+      </field>
       <select_unspecified>N</select_unspecified>
       <meta>
         <name>Specimen_customform#Date of Destruction</name>
@@ -1427,7 +1431,7 @@
       </field>
       <field>
         <name>Specimen_customform#Time Point Day</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -1439,7 +1443,7 @@
       </field>
       <field>
         <name>Specimen_customform#Time Point Course</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -1511,6 +1515,18 @@
       </field>
       <field>
         <name>Specimen_customform#Destruction Reason</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SampNum</name>
         <type>String</type>
         <format/>
         <currency/>

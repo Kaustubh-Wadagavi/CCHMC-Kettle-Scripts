@@ -447,7 +447,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>SpecAli input</from>
+      <from>Aliquotes input</from>
       <to>par spec lab input</to>
       <enabled>Y</enabled>
     </hop>
@@ -493,182 +493,7 @@
     </hop>
   </order>
   <step>
-    <name>Lineage</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Lineage</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Derived</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>Y</unique_rows>
-    <fields>
-      <field>
-        <name>Parent Specimen Label</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>Type</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>256</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Spec Lab</name>
-    <type>ConcatFields</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>.</separator>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name/>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>Parent Specimen Label</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>AliquotNum</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <ConcatFields>
-      <targetFieldName>Specimen Label</targetFieldName>
-      <targetFieldLength>0</targetFieldLength>
-      <removeSelectedFields>N</removeSelectedFields>
-    </ConcatFields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>528</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SpecAli input</name>
+    <name>Aliquotes input</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -717,7 +542,7 @@
       </field>
       <field>
         <name>AliquotDate</name>
-        <type>String</type>
+        <type>Date</type>
         <format>MM/dd/yyyy HH:mm:ss</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -761,7 +586,7 @@
       </field>
       <field>
         <name>AliquotConc</name>
-        <type>String</type>
+        <type>Number</type>
         <format>#.#</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -879,8 +704,183 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>96</yloc>
+      <xloc>64</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lineage</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Lineage</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Derived</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>Y</unique_rows>
+    <fields>
+      <field>
+        <name>Parent Specimen Label</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>Type</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Spec Lab</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>.</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>Parent Specimen Label</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>AliquotNum</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>Specimen Label</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -909,7 +909,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>/home/user/Documents/CCHMC Data Migration/Output/CCHMC_2Specimen.csv</name>
+      <name>/home/krishagni/Desktop/cchmc/output/cchmc-derivatives</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
@@ -1023,7 +1023,7 @@
         <precision>0</precision>
       </field>
       <field>
-        <name>SampleExhausted</name>
+        <name>Available Quantity</name>
         <type>Integer</type>
         <format>#</format>
         <currency>Rs.</currency>
@@ -1092,8 +1092,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>208</yloc>
+      <xloc>576</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1109,7 +1109,7 @@
       <schema_name/>
     </partitioning>
     <field_to_use>SampleExhausted</field_to_use>
-    <target_field/>
+    <target_field>SampleExhausted</target_field>
     <non_match_default/>
     <fields>
       <field>
@@ -1130,8 +1130,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>208</yloc>
+      <xloc>576</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1146,7 +1146,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/user/Documents/CCHMC Data Migration/Input/OpenSpecimenAccessTables/cSampleComp.csv</filename>
+    <filename>/home/krishagni/Desktop/cchmc/input/cSampleComp.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1204,8 +1204,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>96</yloc>
+      <xloc>240</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1258,8 +1258,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>208</yloc>
+      <xloc>64</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1274,7 +1274,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/user/Documents/CCHMC Data Migration/Output/CCHMC_1Specimen.csv</filename>
+    <filename>/home/krishagni/Desktop/cchmc/output/cchmc-primary-specimens.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1296,7 +1296,7 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>8</length>
+        <length>10</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1307,7 +1307,7 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>11</length>
+        <length>17</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1318,7 +1318,7 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>20</length>
+        <length>23</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1329,7 +1329,7 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>32</length>
+        <length>12</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1345,15 +1345,15 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Concentration</name>
+        <name>Conc</name>
         <type>Number</type>
         <format>#.#</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>4</length>
         <precision>1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
         <name>Comments</name>
@@ -1368,50 +1368,39 @@
       </field>
       <field>
         <name>Collection Event#Date and Time</name>
+        <type>Date</type>
+        <format>MM-dd-yyyy</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Time Point Day</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Time Point Course</name>
         <type>String</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>19</length>
+        <length>18</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Specimen1_customform#Circulating Blasts (%)</name>
-        <type>Number</type>
-        <format>#.#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Specimen1_customform#BM Blasts (%)</name>
-        <type>Number</type>
-        <format>#.#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>6</length>
-        <precision>2</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>Specimen1_customform#Viability (%)</name>
-        <type>Number</type>
-        <format>#.#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Specimen1_customform#Date of Destruction</name>
+        <name>Specimen_customform#Time Point Months Since End of Therapy</name>
         <type>Boolean</type>
         <format/>
         <currency>Rs.</currency>
@@ -1422,8 +1411,52 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Specimen1_customform#Destruction Reason</name>
-        <type>Boolean</type>
+        <name>Specimen_customform#Circulating Blasts (%)</name>
+        <type>Number</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#BM Blasts (%)</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Viability (%)</name>
+        <type>Number</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Date of Destruction</name>
+        <type>Date</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Destruction Reason</name>
+        <type>String</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -1453,8 +1486,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>336</yloc>
+      <xloc>64</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1539,8 +1572,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>96</yloc>
+      <xloc>416</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1557,20 +1590,20 @@
     </partitioning>
     <fields>
       <field>
-        <name>CP Short Title</name>
+        <name>AliquotNum</name>
       </field>
       <field>
-        <name>Visit Name</name>
-      </field>
-      <field>
-        <name>Parent Specimen Label</name>
-      </field>
-      <field>
-        <name>Type</name>
+        <name>SampleNum</name>
       </field>
       <field>
         <name>AliquotDate</name>
         <rename>Processing Event#Date and Time</rename>
+      </field>
+      <field>
+        <name>AliquotSampComp</name>
+      </field>
+      <field>
+        <name>AliquotSampUnits</name>
       </field>
       <field>
         <name>AliquotBarCode</name>
@@ -1585,17 +1618,44 @@
         <rename>Initial Quantity</rename>
       </field>
       <field>
-        <name>AliquotComments</name>
-        <rename>Comments</rename>
+        <name>AliquotLocation</name>
       </field>
       <field>
-        <name>AliquotNum</name>
+        <name>AliquotBoxNumber</name>
+      </field>
+      <field>
+        <name>AliquotShelfNumber</name>
+      </field>
+      <field>
+        <name>AliquotSlotNumber</name>
+      </field>
+      <field>
+        <name>AliquotPositionNumber</name>
+      </field>
+      <field>
+        <name>AliquotComments</name>
+        <rename>Comments</rename>
       </field>
       <field>
         <name>SampleExhausted</name>
       </field>
       <field>
-        <name>AliquotSampUnits</name>
+        <name>upsize_ts</name>
+      </field>
+      <field>
+        <name>CP Short Title</name>
+      </field>
+      <field>
+        <name>Visit Name</name>
+      </field>
+      <field>
+        <name>Parent Specimen Label</name>
+      </field>
+      <field>
+        <name>Type</name>
+      </field>
+      <field>
+        <name>short</name>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1643,7 +1703,7 @@
     </remotesteps>
     <GUI>
       <xloc>400</xloc>
-      <yloc>336</yloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1690,8 +1750,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>208</yloc>
+      <xloc>240</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
