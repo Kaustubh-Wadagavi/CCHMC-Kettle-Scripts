@@ -512,7 +512,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Oncology</nullif>
+        <nullif>Oncology_1</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -788,7 +788,7 @@
       </field>
       <field>
         <name>PercentCirculatingBlasts</name>
-        <type>Boolean</type>
+        <type>Integer</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -810,7 +810,7 @@
       </field>
       <field>
         <name>ViabilityPercent</name>
-        <type>Boolean</type>
+        <type>Number</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -843,7 +843,7 @@
       </field>
       <field>
         <name>TimepointMonthsSinceEndofTherapy</name>
-        <type>Boolean</type>
+        <type>Number</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -958,95 +958,72 @@
     <fields>
       <field>
         <name>SampNum</name>
-        <rename/>
       </field>
       <field>
         <name>UPN</name>
-        <rename/>
       </field>
       <field>
         <name>SampSource</name>
-        <rename/>
       </field>
       <field>
         <name>SpecimenTimepoint</name>
-        <rename/>
       </field>
       <field>
         <name>SampleAccessionNum</name>
-        <rename/>
       </field>
       <field>
         <name>PercentCirculatingBlasts</name>
-        <rename/>
       </field>
       <field>
         <name>PercentBMBlasts</name>
-        <rename/>
       </field>
       <field>
         <name>ViabilityPercent</name>
-        <rename/>
       </field>
       <field>
         <name>TimepointCourse</name>
-        <rename/>
       </field>
       <field>
         <name>TimepointDay</name>
-        <rename/>
       </field>
       <field>
         <name>TimepointMonthsSinceEndofTherapy</name>
-        <rename/>
       </field>
       <field>
         <name>FreezeDate</name>
-        <rename/>
       </field>
       <field>
         <name>FreezeTime</name>
-        <rename/>
       </field>
       <field>
         <name>Conc</name>
-        <rename/>
       </field>
       <field>
         <name>Comments</name>
-        <rename/>
       </field>
       <field>
         <name>DateofDestruction</name>
-        <rename/>
       </field>
       <field>
         <name>DestructionReason</name>
-        <rename/>
       </field>
       <field>
         <name>upsize_ts</name>
-        <rename/>
       </field>
       <field>
         <name>Type</name>
-        <rename/>
       </field>
       <field>
         <name>Visit Name</name>
-        <rename/>
       </field>
       <field>
         <name>CP Short Title</name>
-        <rename/>
       </field>
       <field>
         <name>Lineage</name>
-        <rename/>
       </field>
       <field>
         <name>Specimen Label</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1116,10 +1093,6 @@
       </field>
       <field>
         <name>Visit Name</name>
-        <rename/>
-      </field>
-      <field>
-        <name>SampSource</name>
         <rename/>
       </field>
       <field>
@@ -1381,18 +1354,6 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>SampSource</name>
-        <type>Integer</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
         <name>Specimen Label</name>
         <type>String</type>
         <format/>
@@ -1466,7 +1427,7 @@
       </field>
       <field>
         <name>Specimen_customform#Time Point Day</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -1478,7 +1439,7 @@
       </field>
       <field>
         <name>Specimen_customform#Time Point Course</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency/>
         <decimal/>
@@ -1490,7 +1451,7 @@
       </field>
       <field>
         <name>Specimen_customform#Time Point Months Since End of Therapy</name>
-        <type>Boolean</type>
+        <type>Integer</type>
         <format/>
         <currency/>
         <decimal/>
@@ -1539,7 +1500,7 @@
       <field>
         <name>Specimen_customform#Date of Destruction</name>
         <type>Date</type>
-        <format>MM/dd/yyyy</format>
+        <format>MM-dd-yyyy</format>
         <currency/>
         <decimal/>
         <group/>
