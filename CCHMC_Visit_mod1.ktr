@@ -477,7 +477,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Specimen Input</from>
+      <from>Sample Input</from>
       <to>Select specimen values </to>
       <enabled>Y</enabled>
     </hop>
@@ -503,42 +503,89 @@
     </hop>
   </order>
   <step>
-    <name>Set CP title and event label</name>
-    <type>Constant</type>
+    <name>Creating visit name</name>
+    <type>ConcatFields</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <separator>_</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
     <fields>
       <field>
-        <name>CP Short Title</name>
-        <type>String</type>
-        <format/>
+        <name>UPN</name>
+        <type>Integer</type>
+        <format>00000</format>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Oncology_1</nullif>
-        <length>-1</length>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>5</length>
         <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>Event Label</name>
-        <type>String</type>
-        <format/>
+        <name>SpecimenTimepoint</name>
+        <type>Integer</type>
+        <format>00</format>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Collection</nullif>
+        <nullif>XX</nullif>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FreezeDate</name>
+        <type>Date</type>
+        <format>MM-dd-yyyy</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
       </field>
     </fields>
+    <ConcatFields>
+      <targetFieldName>Name</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -548,7 +595,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
+      <xloc>720</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -639,6 +686,85 @@
     </GUI>
   </step>
   <step>
+    <name>Select specimen values </name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>SampNum</name>
+      </field>
+      <field>
+        <name>UPN</name>
+      </field>
+      <field>
+        <name>SampSource</name>
+      </field>
+      <field>
+        <name>SpecimenTimepoint</name>
+      </field>
+      <field>
+        <name>SampleAccessionNum</name>
+      </field>
+      <field>
+        <name>PercentCirculatingBlasts</name>
+      </field>
+      <field>
+        <name>PercentBMBlasts</name>
+      </field>
+      <field>
+        <name>ViabilityPercent</name>
+      </field>
+      <field>
+        <name>TimepointCourse</name>
+      </field>
+      <field>
+        <name>TimepointDay</name>
+      </field>
+      <field>
+        <name>TimepointMonthsSinceEndofTherapy</name>
+      </field>
+      <field>
+        <name>FreezeDate</name>
+      </field>
+      <field>
+        <name>FreezeTime</name>
+      </field>
+      <field>
+        <name>Conc</name>
+      </field>
+      <field>
+        <name>Comments</name>
+      </field>
+      <field>
+        <name>DateofDestruction</name>
+      </field>
+      <field>
+        <name>DestructionReason</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>176</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Select values </name>
     <type>SelectValues</type>
     <description/>
@@ -656,19 +782,15 @@
       </field>
       <field>
         <name>CP Short Title</name>
-        <rename/>
       </field>
       <field>
         <name>Event Label</name>
-        <rename/>
       </field>
       <field>
         <name>Name</name>
-        <rename/>
       </field>
       <field>
         <name>FreezeDate</name>
-        <rename/>
       </field>
       <field>
         <name>specimenpoint</name>
@@ -725,8 +847,8 @@
     </GUI>
   </step>
   <step>
-    <name>Select specimen values </name>
-    <type>SelectValues</type>
+    <name>Set CP title and event label</name>
+    <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -737,74 +859,29 @@
     </partitioning>
     <fields>
       <field>
-        <name>SampNum</name>
-        <rename/>
+        <name>CP Short Title</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Oncology_1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>UPN</name>
-        <rename/>
+        <name>Event Label</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Collection</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
       </field>
-      <field>
-        <name>SampSource</name>
-        <rename/>
-      </field>
-      <field>
-        <name>SpecimenTimepoint</name>
-        <rename/>
-      </field>
-      <field>
-        <name>SampleAccessionNum</name>
-        <rename/>
-      </field>
-      <field>
-        <name>PercentCirculatingBlasts</name>
-        <rename/>
-      </field>
-      <field>
-        <name>PercentBMBlasts</name>
-        <rename/>
-      </field>
-      <field>
-        <name>ViabilityPercent</name>
-        <rename/>
-      </field>
-      <field>
-        <name>TimepointCourse</name>
-        <rename/>
-      </field>
-      <field>
-        <name>TimepointDay</name>
-        <rename/>
-      </field>
-      <field>
-        <name>TimepointMonthsSinceEndofTherapy</name>
-        <rename/>
-      </field>
-      <field>
-        <name>FreezeDate</name>
-        <rename/>
-      </field>
-      <field>
-        <name>FreezeTime</name>
-        <rename/>
-      </field>
-      <field>
-        <name>Conc</name>
-        <rename/>
-      </field>
-      <field>
-        <name>Comments</name>
-        <rename/>
-      </field>
-      <field>
-        <name>DateofDestruction</name>
-        <rename/>
-      </field>
-      <field>
-        <name>DestructionReason</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -815,8 +892,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>160</yloc>
+      <xloc>464</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -871,8 +948,8 @@
     </GUI>
   </step>
   <step>
-    <name>visit output</name>
-    <type>TextFileOutput</type>
+    <name>Sort visit dates</name>
+    <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -881,108 +958,21 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator>,</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>Y</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>/home/krishagni/Desktop/cchmc/output/cchmc-visits</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>CP Short Title</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PPID</name>
-        <type>Integer</type>
-        <format>00000</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Event Label</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Name</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Visit Date</name>
-        <type>Date</type>
-        <format>MM-dd-yyyy</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Clinical Status</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
+        <name>FreezeDate</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <attributes/>
@@ -994,13 +984,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1200</xloc>
-      <yloc>48</yloc>
+      <xloc>464</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Specimen Input</name>
+    <name>Sample Input</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1239,230 +1229,6 @@
     </GUI>
   </step>
   <step>
-    <name>sort visit name</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>Y</unique_rows>
-    <fields>
-      <field>
-        <name>Name</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>720</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Creating visit name</name>
-    <type>ConcatFields</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>_</separator>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name/>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>UPN</name>
-        <type>Integer</type>
-        <format>00000</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>5</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>SpecimenTimepoint</name>
-        <type>Integer</type>
-        <format>00</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>XX</nullif>
-        <trim_type>none</trim_type>
-        <length>2</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FreezeDate</name>
-        <type>Date</type>
-        <format>MM-dd-yyyy</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <ConcatFields>
-      <targetFieldName>Name</targetFieldName>
-      <targetFieldLength>0</targetFieldLength>
-      <removeSelectedFields>N</removeSelectedFields>
-    </ConcatFields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>720</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort visit dates</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>FreezeDate</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>lookup timepoint</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>Timepoint input</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>SpecimenTimepoint</name>
-        <field>Code</field>
-      </key>
-      <value>
-        <name>Description</name>
-        <rename>specimenpoint</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>960</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Timepoint input</name>
     <type>CsvInput</type>
     <description/>
@@ -1522,6 +1288,219 @@
     <GUI>
       <xloc>960</xloc>
       <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup timepoint</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Timepoint input</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>SpecimenTimepoint</name>
+        <field>Code</field>
+      </key>
+      <value>
+        <name>Description</name>
+        <rename>specimenpoint</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sort visit name</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>Y</unique_rows>
+    <fields>
+      <field>
+        <name>Name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>visit output</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>/home/krishagni/Desktop/cchmc/output/cchmc-visits</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+      <field>
+        <name>CP Short Title</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>PPID</name>
+        <type>Integer</type>
+        <format>00000</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Event Label</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Name</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Visit Date</name>
+        <type>Date</type>
+        <format>MM-dd-yyyy</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Clinical Status</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1200</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
