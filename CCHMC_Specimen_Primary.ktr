@@ -443,18 +443,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 2</from>
+      <from>Select and alter tables</from>
       <to>Text file output</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Specimen Label</from>
-      <to>Select values</to>
+      <from>Creating Specimen Labels</from>
+      <to>Converting date to string</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Concat fields</from>
-      <to>Select values 2</to>
+      <from>Concat  date and time fields</from>
+      <to>Select and alter tables</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -474,12 +474,7 @@
     </hop>
     <hop>
       <from>Creating visit name</from>
-      <to>Removing dash from date</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Removing dash from date</from>
-      <to>Add constants</to>
+      <to>Removing dash from visit name</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -488,23 +483,38 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add constants</from>
-      <to>Specimen Label</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
+      <from>Converting date to string</from>
       <to>Replacing empty on Freeze date and Freeze time</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Replacing empty on Freeze date and Freeze time</from>
-      <to>Concat fields</to>
+      <to>Concat  date and time fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add sequence for mutiple same specimens in one visit</from>
+      <to>Creating Specimen Labels</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Removing dash from visit name</from>
+      <to>Add CP and Lineage constants</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add CP and Lineage constants</from>
+      <to>Sort rows based on visit name and short desc</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows based on visit name and short desc</from>
+      <to>Add sequence for mutiple same specimens in one visit</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Add constants</name>
+    <name>Add CP and Lineage constants</name>
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
@@ -549,13 +559,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>368</yloc>
+      <xloc>1280</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Concat fields</name>
+    <name>Concat  date and time fields</name>
     <type>ConcatFields</type>
     <description/>
     <distribute>Y</distribute>
@@ -635,8 +645,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1216</xloc>
-      <yloc>32</yloc>
+      <xloc>736</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -785,7 +795,7 @@
     </GUI>
   </step>
   <step>
-    <name>Removing dash from date</name>
+    <name>Removing dash from visit name</name>
     <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
@@ -818,8 +828,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>208</yloc>
+      <xloc>880</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -893,8 +903,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
-      <yloc>32</yloc>
+      <xloc>1184</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1138,7 +1148,7 @@
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
+    <name>Converting date to string</name>
     <type>SelectValues</type>
     <description/>
     <distribute>N</distribute>
@@ -1151,72 +1161,95 @@
     <fields>
       <field>
         <name>SampNum</name>
+        <rename/>
       </field>
       <field>
         <name>UPN</name>
+        <rename/>
       </field>
       <field>
         <name>SampSource</name>
+        <rename/>
       </field>
       <field>
         <name>SpecimenTimepoint</name>
+        <rename/>
       </field>
       <field>
         <name>SampleAccessionNum</name>
+        <rename/>
       </field>
       <field>
         <name>PercentCirculatingBlasts</name>
+        <rename/>
       </field>
       <field>
         <name>PercentBMBlasts</name>
+        <rename/>
       </field>
       <field>
         <name>ViabilityPercent</name>
+        <rename/>
       </field>
       <field>
         <name>TimepointCourse</name>
+        <rename/>
       </field>
       <field>
         <name>TimepointDay</name>
+        <rename/>
       </field>
       <field>
         <name>TimepointMonthsSinceEndofTherapy</name>
+        <rename/>
       </field>
       <field>
         <name>FreezeDate</name>
+        <rename/>
       </field>
       <field>
         <name>FreezeTime</name>
+        <rename/>
       </field>
       <field>
         <name>Conc</name>
+        <rename/>
       </field>
       <field>
         <name>Comments</name>
+        <rename/>
       </field>
       <field>
         <name>DateofDestruction</name>
+        <rename/>
       </field>
       <field>
         <name>DestructionReason</name>
+        <rename/>
       </field>
       <field>
         <name>upsize_ts</name>
+        <rename/>
       </field>
       <field>
         <name>Type</name>
+        <rename/>
       </field>
       <field>
         <name>Visit Name</name>
+        <rename/>
       </field>
       <field>
         <name>CP Short Title</name>
+        <rename/>
       </field>
       <field>
         <name>Lineage</name>
+        <rename/>
       </field>
       <field>
         <name>Specimen Label</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1263,13 +1296,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
-      <yloc>208</yloc>
+      <xloc>1184</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 2</name>
+    <name>Select and alter tables</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1282,24 +1315,31 @@
     <fields>
       <field>
         <name>CP Short Title</name>
+        <rename/>
       </field>
       <field>
         <name>Visit Name</name>
+        <rename/>
       </field>
       <field>
         <name>Specimen Label</name>
+        <rename/>
       </field>
       <field>
         <name>Type</name>
+        <rename/>
       </field>
       <field>
         <name>Lineage</name>
+        <rename/>
       </field>
       <field>
         <name>Conc</name>
+        <rename/>
       </field>
       <field>
         <name>Comments</name>
+        <rename/>
       </field>
       <field>
         <name>d1</name>
@@ -1339,6 +1379,7 @@
       </field>
       <field>
         <name>SampNum</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <meta>
@@ -1385,8 +1426,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1216</xloc>
-      <yloc>208</yloc>
+      <xloc>368</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1444,12 +1485,12 @@
     </remotesteps>
     <GUI>
       <xloc>368</xloc>
-      <yloc>208</yloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Specimen Label</name>
+    <name>Creating Specimen Labels</name>
     <type>ConcatFields</type>
     <description/>
     <distribute>N</distribute>
@@ -1459,7 +1500,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator>_</separator>
+    <separator>.</separator>
     <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
@@ -1498,26 +1539,38 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>SampNum</name>
-        <type>None</type>
-        <format>00000</format>
+        <name>ShortDesc</name>
+        <type>String</type>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>result</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
     </fields>
     <ConcatFields>
       <targetFieldName>Specimen Label</targetFieldName>
-      <targetFieldLength>20</targetFieldLength>
+      <targetFieldLength>0</targetFieldLength>
       <removeSelectedFields>N</removeSelectedFields>
     </ConcatFields>
     <attributes/>
@@ -1529,8 +1582,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
-      <yloc>368</yloc>
+      <xloc>768</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1778,8 +1831,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1216</xloc>
-      <yloc>368</yloc>
+      <xloc>112</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1810,6 +1863,12 @@
         <default/>
         <type>None</type>
       </value>
+      <value>
+        <name>ShortDesc</name>
+        <rename>ShortDesc</rename>
+        <default/>
+        <type>None</type>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -1821,7 +1880,7 @@
     </remotesteps>
     <GUI>
       <xloc>112</xloc>
-      <yloc>208</yloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1895,7 +1954,93 @@
     </remotesteps>
     <GUI>
       <xloc>112</xloc>
-      <yloc>368</yloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add sequence for mutiple same specimens in one visit</name>
+    <type>FieldsChangeSequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <start>1</start>
+    <increment>1</increment>
+    <resultfieldName>result</resultfieldName>
+    <fields>
+      <field>
+        <name>Visit Name</name>
+      </field>
+      <field>
+        <name>ShortDesc</name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows based on visit name and short desc</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>Visit Name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>ShortDesc</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1280</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
