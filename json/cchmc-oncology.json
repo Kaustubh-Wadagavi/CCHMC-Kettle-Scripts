@@ -192,6 +192,23 @@
            }
          },
          {
+          "name":"specimen.barcode",
+          "caption":"Barcode",
+          "type":"text",
+          "optional":true,
+          "showIf":{
+             "op":"OR",
+             "rules":[
+                {
+                   "field":"cp.barcodingEnabled",
+                   "op":"==",
+                   "value":"true"
+                }
+             ]
+          },
+          "showInOverviewIf":"useShowIf"
+         },
+         {
            "name": "specimen.lineage",
            "caption": "Lineage",
            "type": "radio",
@@ -394,62 +411,6 @@
            "showInOverviewIf": "useShowIf"
          },
          {
-           "name": "specimen.receivedEvent.user",
-           "caption": "Receiver",
-           "type": "user",
-           "defaultValue": "current_user",
-           "showIf": {
-             "op": "AND",
-             "rules": [{
-               "field": "specimen.lineage",
-               "op": "==",
-               "value": "'New'"
-             },
-             {
-               "field" : "specimen.status",
-               "op" : "==",
-               "value" : "'Collected'"
-             },
-             {
-               "field": "specimen.reqId",
-               "op": "not_exist"
-             }
-           ]
-           },
-           "showInOverviewIf": "useShowIf",
-           "subFields": [{
-             "name": "emailAddress",
-             "caption": "Collector Email Address"
-           }]
-         },
-         {
-           "name": "specimen.receivedEvent.time",
-           "caption": "Received Date & Time",
-           "type": "datetime",
-           "defaultValue": "current_date",
-           "optional": true,
-           "showIf": {
-             "op": "AND",
-             "rules": [
-               {
-                 "field": "specimen.lineage",
-                 "op": "==",
-                 "value": "'New'"
-               },
-               {
-                 "field" : "specimen.status",
-                 "op" : "==",
-                 "value" : "'Collected'"
-               },
-               {
-                 "field": "specimen.reqId",
-                 "op": "not_exist"
-               }
-             ]
-           },
-           "showInOverviewIf": "useShowIf"
-         },
-         {
            "name": "specimen.events.SpecimenFrozenEvent.time",
            "caption": "Frozen Time",
            "type": "datetime",
@@ -477,52 +438,132 @@
           "name": "specimen.extensionDetail.attrsMap.time_point_course",
           "caption": "Time Point Course",
           "type": "text",
-          "optional": true
-          },
-          {
+          "optional": true,
+          "showInOverviewIf" : "useShowIf",
+          "showIf" : {
+          "op" : "AND",
+          "rules" : [ {
+            "field": "specimen.lineage",
+            "op": "==",
+            "value": "'New'"
+            }
+           ]
+          }
+         },
+         {
             "name": "specimen.extensionDetail.attrsMap.time_point_day",
             "caption": "Time Point Day",
             "type": "text",
-            "optional": true
+            "optional": true,
+            "showInOverviewIf" : "useShowIf",
+            "showIf" : {
+              "op" : "AND",
+              "rules" : [ {
+                "field": "specimen.lineage",
+                "op": "==",
+                "value": "'New'"
+               }
+              ]
+            }
           },
           {
             "name": "specimen.extensionDetail.attrsMap.time_point_months_since_end_of_therapy",
             "caption": "Time Point Months Since End of Therapy",
             "type": "text",
-            "optional": true
+            "optional": true,
+            "showInOverviewIf" : "useShowIf",
+            "showIf" : {
+              "op" : "AND",
+              "rules" : [ {
+                "field": "specimen.lineage",
+                "op": "==",
+                "value": "'New'"
+               }
+              ]
+            }
           },
          {
           "name":"specimen.extensionDetail.attrsMap.percent_circulating_blasts",
           "caption": "Circulating Blasts (%)",
           "type": "text",
           "optional": true,
-          "pattern": "^-?\\d+(,\\d+)*(\\.\\d+(e\\d+)?)?$"
+          "pattern": "^-?\\d+(,\\d+)*(\\.\\d+(e\\d+)?)?$",
+          "showInOverviewIf" : "useShowIf",
+          "showIf" : {
+            "op" : "AND",
+            "rules" : [ {
+              "field": "specimen.lineage",
+              "op": "==",
+              "value": "'New'"
+              }
+            ]
+          }
          },
          {
           "name":"specimen.extensionDetail.attrsMap.bm_blasts",
           "caption": "BM Blasts (%)",
           "type": "text",
           "optional": true,
-          "pattern": "^-?\\d+(,\\d+)*(\\.\\d+(e\\d+)?)?$"
+          "pattern": "^-?\\d+(,\\d+)*(\\.\\d+(e\\d+)?)?$",
+          "showInOverviewIf" : "useShowIf",
+          "showIf" : {
+            "op" : "AND",
+            "rules" : [ {
+              "field": "specimen.lineage",
+              "op": "==",
+              "value": "'New'"
+              }
+            ]
+          }
          },
          {
           "name":"specimen.extensionDetail.attrsMap.viability",
           "caption": "Viability (%)",
           "type": "text",
           "optional": true,
-          "pattern": "^-?\\d+(,\\d+)*(\\.\\d+(e\\d+)?)?$"
+          "pattern": "^-?\\d+(,\\d+)*(\\.\\d+(e\\d+)?)?$",
+          "showInOverviewIf" : "useShowIf",
+          "showIf" : {
+            "op" : "AND",
+            "rules" : [ {
+              "field": "specimen.lineage",
+              "op": "==",
+              "value": "'New'"
+              }
+            ]
+          }
          },
          {
           "name": "specimen.extensionDetail.attrsMap.date_of_destruction",
           "caption": "Date of Destruction",
           "type": "date",
-          "optional": true
+          "optional": true,
+          "showInOverviewIf" : "useShowIf",
+          "showIf" : {
+            "op" : "AND",
+            "rules" : [ {
+              "field": "specimen.lineage",
+              "op": "==",
+              "value": "'New'"
+              }
+            ]
+           }
         },
         {
           "name": "specimen.extensionDetail.attrsMap.destruction_reason",
           "caption": "Destruction Reason",
           "type": "text",
-          "optional": true
+          "optional": true,
+          "showInOverviewIf" : "useShowIf",
+          "showIf" : {
+            "op" : "AND",
+            "rules" : [ {
+              "field": "specimen.lineage",
+              "op": "==",
+              "value": "'New'"
+              }
+            ]
+          }
         }
        ]
      }
