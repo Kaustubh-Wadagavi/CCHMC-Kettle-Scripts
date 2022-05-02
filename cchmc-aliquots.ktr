@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>CCHMC_Participant_mod1</name>
+    <name>cchmc-aliquots</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,43 +427,231 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/01/19 11:44:36.771</created_date>
+    <created_date>2022/05/02 12:49:03.995</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/01/19 11:44:36.771</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2022/05/02 12:49:03.995</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <order>
     <hop>
-      <from>Participant Input</from>
-      <to>Select values</to>
+      <from>Sample type</from>
+      <to>create derivative labels</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
-      <to>registration date nulls</to>
+      <from>Select and alter columns</from>
+      <to>cchmc aliquotes</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 2</from>
-      <to>Participant output</to>
+      <from>add lineage aliquot</from>
+      <to>Select and alter columns</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>registration date nulls</from>
-      <to>Site Name, CP , Registration site Constant Values</to>
+      <from>aliquots input</from>
+      <to>get primary PSL</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Site Name, CP , Registration site Constant Values</from>
-      <to>Select values 2</to>
+      <from>cSampComp input</from>
+      <to>Sample type</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>create aliquot labels</from>
+      <to>add lineage aliquot</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>create derivative labels</from>
+      <to>sort rows based sample no and shortDesc</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get primary PSL</from>
+      <to>Sample type</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>primary specimen output</from>
+      <to>get primary PSL</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sequence for aliquots</from>
+      <to>create aliquot labels</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sort rows based sample no and shortDesc</from>
+      <to>sequence for aliquots</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Participant Input</name>
+    <name>Sample type</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>cSampComp input</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>AliquotSampComp</name>
+        <field>Code</field>
+      </key>
+      <value>
+        <name>Description</name>
+        <rename>Type</rename>
+        <default/>
+        <type>None</type>
+      </value>
+      <value>
+        <name>ShortDesc</name>
+        <rename>ShortDesc</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>347</xloc>
+      <yloc>189</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select and alter columns</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Aliquot Label</name>
+        <rename>Specimen Label</rename>
+      </field>
+      <field>
+        <name>AliquotBarCode</name>
+        <rename>Barcode</rename>
+      </field>
+      <field>
+        <name>Type</name>
+      </field>
+      <field>
+        <name>Lineage</name>
+      </field>
+      <field>
+        <name>Derivative Label</name>
+        <rename>Parent Specimen Label</rename>
+      </field>
+      <field>
+        <name>AliquotComments</name>
+        <rename>Comments</rename>
+      </field>
+      <field>
+        <name>AliquotDate</name>
+        <rename>Processing Event#Date and Time</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>Processing Event#Date and Time</name>
+        <rename>Processing Event#Date and Time</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>MM-dd-yyyy</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>619</xloc>
+      <yloc>333</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>add lineage aliquot</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Lineage</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Aliquot</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>971</xloc>
+      <yloc>333</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>aliquots input</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -474,365 +661,46 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/krishagni/Desktop/cchmc/input/tblPatients.csv</filename>
+    <filename>/home/krishagni/Desktop/cchmc/input/tblSamplesAliquots.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
     <separator>,</separator>
     <enclosure>"</enclosure>
     <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
+    <buffer_size>500000000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
+    <format>Unix</format>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
-        <name>UPN</name>
+        <name>AliquotNum</name>
         <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Specialty</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>8</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>MRN</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Deceased</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Fname</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>11</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>MiddleName</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>12</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>LName</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DOB</name>
-        <type>String</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>-1</length>
-        <precision>-1</precision>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Gender</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Race</name>
+        <name>SampleNum</name>
         <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Ethnicity</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact1LasttName</name>
-        <type>String</type>
         <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>11</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact1FirstName</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>9</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact1Address</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>35</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact1City</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact1State</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact1Zip</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>10</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact1Phone</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact2LasttName</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>13</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact2FirstName</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>6</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact2Address</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>24</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact2City</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>10</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact2State</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact2Zip</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Contact2Phone</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>ConsentVer</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>10</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>ConsentDate</name>
-        <type>String</type>
-        <format>MM/dd/yyyy HH:mm:ss</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>-1</length>
-        <precision>-1</precision>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>ConsentTime</name>
-        <type>String</type>
-        <format>MM/dd/yyyy HH:mm:ss</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>ReConsentVer</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>10</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>ReConsentDate</name>
+        <name>AliquotDate</name>
         <type>Date</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Diagnosis</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DiagnosisDate</name>
-        <type>String</type>
         <format>MM/dd/yyyy HH:mm:ss</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
@@ -842,62 +710,18 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>ICDDiagnosisCode</name>
+        <name>AliquotSampComp</name>
         <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>AccessionNumber</name>
-        <type>String</type>
         <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>10</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>RefDoc</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Institute</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>Comments</name>
-        <type>String</type>
-        <format/>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>199</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DateCreated</name>
+        <name>AliquotSampUnits</name>
         <type>String</type>
         <format/>
         <currency>Rs.</currency>
@@ -908,9 +732,20 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>DateLastUpdated</name>
-        <type>String</type>
-        <format>MM/dd/yyyy HH:mm:ss</format>
+        <name>AliquotBarCode</name>
+        <type>Integer</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>AliquotConc</name>
+        <type>Number</type>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -919,9 +754,97 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>NoMoreSamplesDate</name>
+        <name>AliquotVolume</name>
+        <type>Integer</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>AliquotLocation</name>
         <type>String</type>
-        <format>MM/dd/yyyy HH:mm:ss</format>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>AliquotBoxNumber</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>AliquotShelfNumber</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>AliquotSlotNumber</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>AliquotPositionNumber</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>AliquotComments</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>SampleExhausted</name>
+        <type>Integer</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>upsize_ts</name>
+        <type>Boolean</type>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -939,13 +862,87 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>48</yloc>
+      <xloc>99</xloc>
+      <yloc>78</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Participant output</name>
+    <name>cSampComp input</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>/home/krishagni/Desktop/cchmc/input/cSampleType.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>Code</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Description</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>32</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ShortDesc</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>5</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>347</xloc>
+      <yloc>77</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>cchmc aliquotes</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -963,13 +960,13 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>/home/krishagni/Desktop/cchmc/output/cchmc-participants</name>
+      <name>/home/krishagni/Desktop/cchmc/output/cchmc-aliquotes</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
@@ -987,7 +984,7 @@
     </file>
     <fields>
       <field>
-        <name>CP Short Title</name>
+        <name>Specimen Label</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -999,9 +996,9 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>PPID</name>
-        <type>Number</type>
-        <format>00000</format>
+        <name>Barcode</name>
+        <type>Integer</type>
+        <format>0</format>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1011,33 +1008,21 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>Registration Date</name>
-        <type>Date</type>
-        <format>MM-dd-yyyy</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Registration Site</name>
+        <name>Type</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>First Name</name>
+        <name>Lineage</name>
         <type>String</type>
-        <format>null</format>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
@@ -1047,21 +1032,9 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>Middle Name</name>
+        <name>Parent Specimen Label</name>
         <type>String</type>
-        <format>null</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Last Name</name>
-        <type>String</type>
-        <format>null</format>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
@@ -1071,7 +1044,19 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>Date of Birth</name>
+        <name>Comments</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Processing Event#Date and Time</name>
         <type>Date</type>
         <format>MM-dd-yyyy</format>
         <currency/>
@@ -1082,8 +1067,151 @@
         <length>-1</length>
         <precision>-1</precision>
       </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>347</xloc>
+      <yloc>333</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>create aliquot labels</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>.</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
       <field>
-        <name>PMI#1#Site Name</name>
+        <name>Derivative Label</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>aliquoteSeq</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>Aliquot Label</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>971</xloc>
+      <yloc>189</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>create derivative labels</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>.</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>Parent Specimen Label</name>
         <type>None</type>
         <format/>
         <currency/>
@@ -1095,9 +1223,9 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>PMI#1#MRN</name>
-        <type>Number</type>
-        <format>0000000</format>
+        <name>ShortDesc</name>
+        <type>None</type>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
@@ -1106,31 +1234,12 @@
         <length>-1</length>
         <precision>-1</precision>
       </field>
-      <field>
-        <name>Participant_customform#No More Samples Date</name>
-        <type>Date</type>
-        <format>MM-dd-yyyy</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Participant_customform#Comments</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
     </fields>
+    <ConcatFields>
+      <targetFieldName>Derivative Label</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1140,14 +1249,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>48</yloc>
+      <xloc>619</xloc>
+      <yloc>189</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
+    <name>get primary PSL</name>
+    <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1156,177 +1265,250 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <from>primary specimen output</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>SampleNum</name>
+        <field>SampNum</field>
+      </key>
+      <value>
+        <name>Specimen Label</name>
+        <rename>Parent Specimen Label</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>99</xloc>
+      <yloc>190</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>primary specimen output</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>/home/krishagni/Desktop/cchmc/output/cchmc-primary-specimens.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
     <fields>
       <field>
-        <name>UPN</name>
-        <rename>PPID</rename>
+        <name>CP Short Title</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>10</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>DateCreated</name>
-        <rename>Registration Date</rename>
+        <name>Visit Name</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>17</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>DOB</name>
-        <rename>Date of Birth</rename>
+        <name>Specimen Label</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>23</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Gender</name>
+        <name>Type</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Deceased</name>
-        <rename>Vital Status</rename>
+        <name>Lineage</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>3</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Race</name>
-      </field>
-      <field>
-        <name>Ethnicity</name>
-      </field>
-      <field>
-        <name>Fname</name>
-        <rename>First Name</rename>
-      </field>
-      <field>
-        <name>MiddleName</name>
-        <rename>Middle Name</rename>
-      </field>
-      <field>
-        <name>LName</name>
-        <rename>Last Name</rename>
-      </field>
-      <field>
-        <name>Contact1LasttName</name>
-        <rename>Participant_customform#Contact1_Last Name</rename>
-      </field>
-      <field>
-        <name>Contact1FirstName</name>
-        <rename>Participant_customform#Contact1_First Name</rename>
-      </field>
-      <field>
-        <name>Contact1Address</name>
-      </field>
-      <field>
-        <name>Contact1City</name>
-      </field>
-      <field>
-        <name>Contact1State</name>
-      </field>
-      <field>
-        <name>Contact1Zip</name>
-      </field>
-      <field>
-        <name>Contact1Phone</name>
-        <rename>Participant_customform#Contact1_Phone</rename>
-      </field>
-      <field>
-        <name>Contact2LasttName</name>
-        <rename>Participant_customform#Contact2_Last Name</rename>
-      </field>
-      <field>
-        <name>Contact2FirstName</name>
-        <rename>Participant_customform#Contact2_First Name</rename>
-      </field>
-      <field>
-        <name>Contact2Address</name>
-      </field>
-      <field>
-        <name>Contact2City</name>
-      </field>
-      <field>
-        <name>Contact2State</name>
-      </field>
-      <field>
-        <name>Contact2Zip</name>
-      </field>
-      <field>
-        <name>Contact2Phone</name>
-        <rename>Participant_customform#Contact2_Phone</rename>
-      </field>
-      <field>
-        <name>AccessionNumber</name>
-      </field>
-      <field>
-        <name>RefDoc</name>
-        <rename>Participant_customform#RefDoc</rename>
+        <name>Conc</name>
+        <type>Number</type>
+        <format>#.#</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>4</length>
+        <precision>1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
         <name>Comments</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>96</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>MRN</name>
+        <name>Collection Event#Date and Time</name>
+        <type>Date</type>
+        <format>MM-dd-yyyy</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>NoMoreSamplesDate</name>
+        <name>Specimen_customform#Time Point Day</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
       </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>Date of Birth</name>
-        <rename>Date of Birth</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>Registration Date</name>
-        <rename>Registration Date</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>PPID</name>
-        <rename>PPID</rename>
+      <field>
+        <name>Specimen_customform#Time Point Course</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>18</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Time Point Months Since End of Therapy</name>
+        <type>Boolean</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Circulating Blasts (%)</name>
         <type>Number</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>00000</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>NoMoreSamplesDate</name>
-        <rename>NoMoreSamplesDate</rename>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#BM Blasts (%)</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Viability (%)</name>
+        <type>Number</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Date of Destruction</name>
         <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Specimen_customform#Destruction Reason</name>
+        <type>String</type>
+        <format/>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>SampNum</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>Rs.</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1337,14 +1519,47 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>272</yloc>
+      <xloc>99</xloc>
+      <yloc>334</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
+    <name>sequence for aliquots</name>
+    <type>FieldsChangeSequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <start>1</start>
+    <increment>1</increment>
+    <resultfieldName>aliquoteSeq</resultfieldName>
+    <fields>
+      <field>
+        <name>Derivative Label</name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>971</xloc>
+      <yloc>77</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sort rows based sample no and shortDesc</name>
+    <type>SortRows</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
@@ -1353,177 +1568,29 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <directory>/home/krishagni/Desktop/cchmc/testing</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory>100</free_memory>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>CP Short Title</name>
+        <name>SampleNum</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
       <field>
-        <name>PPID</name>
-      </field>
-      <field>
-        <name>Registration Date</name>
-      </field>
-      <field>
-        <name>Registration Site</name>
-      </field>
-      <field>
-        <name>First Name</name>
-      </field>
-      <field>
-        <name>Middle Name</name>
-      </field>
-      <field>
-        <name>Last Name</name>
-      </field>
-      <field>
-        <name>Date of Birth</name>
-      </field>
-      <field>
-        <name>Site Name</name>
-        <rename>PMI#1#Site Name</rename>
-      </field>
-      <field>
-        <name>MRN</name>
-        <rename>PMI#1#MRN</rename>
-      </field>
-      <field>
-        <name>NoMoreSamplesDate</name>
-      </field>
-      <field>
-        <name>Comments</name>
-        <rename>Participant_customform#Comments</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>Date of Birth</name>
-        <rename>Date of Birth</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM-dd-yyyy</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>Registration Date</name>
-        <rename>Registration Date</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM-dd-yyyy</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>PPID</name>
-        <rename>PPID</rename>
-        <type>Number</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>00000</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>NoMoreSamplesDate</name>
-        <rename>Participant_customform#No More Samples Date</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM-dd-yyyy</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Site Name, CP , Registration site Constant Values</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Site Name</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>CCHMC Collection_1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>Registration Site</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>CCHMC Collection_1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>CP Short Title</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Oncology_1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <name>ShortDesc</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <attributes/>
@@ -1535,48 +1602,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>registration date nulls</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <replaceAllByValue/>
-    <replaceAllMask/>
-    <selectFields>Y</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>Registration Date</name>
-        <value>01/01/1990 00:00:00</value>
-        <mask>MM/dd/yyyy HH:mm:ss</mask>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>480</yloc>
+      <xloc>619</xloc>
+      <yloc>77</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

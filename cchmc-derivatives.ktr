@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>derivative_spec</name>
+    <name>cchmc-derivatives</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,150 +427,71 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/01/28 10:09:58.214</created_date>
+    <created_date>2022/05/02 12:47:51.254</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/01/28 10:09:58.214</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2022/05/02 12:47:51.254</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <order>
     <hop>
-      <from>Aliquotes input</from>
-      <to>Lookup for sample number</to>
+      <from>add lineage derivative</from>
+      <to>select and alter column names</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>aliquots input</from>
+      <to>get primary PSL</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>cSampComp input</from>
-      <to>Sample type</to>
+      <to>sample type</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Lookup for sample number</from>
-      <to>Sample type</to>
+      <from>create derivative labels</from>
+      <to>add lineage derivative</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>primary spec output input</from>
-      <to>Lookup for sample number</to>
+      <from>get primary PSL</from>
+      <to>sample type</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add Lineage derivative</from>
-      <to>rearrange all fields </to>
+      <from>primary specimens output</from>
+      <to>get primary PSL</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>rearrange all fields </from>
+      <from>sample type</from>
+      <to>sort rows based on sampNum and ShortDesc</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>select and alter column names</from>
       <to>cchmc derivatives</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get unique derivative labels</from>
-      <to>Add Lineage derivative</to>
+      <from>sort rows based on sampNum and ShortDesc</from>
+      <to>unique derivatives</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>create the derivative labels</from>
-      <to>Sort rows based on parent specimen Labels and types</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows based on parent specimen Labels and types</from>
-      <to>Get unique derivative labels</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Add Lineage aliquot</from>
-      <to>rearrange</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Create Aliquote Labels</from>
-      <to>Add Lineage aliquot</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>rearrange</from>
-      <to>cchmc aliquotes</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>create the derivative labels</from>
-      <to>Alter column names</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sequence for derivative labels</from>
-      <to>create the derivative labels</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sample type</from>
-      <to>sequence for derivative labels</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Sample type</from>
-      <to>sequence for derivative labels</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Alter column names</from>
-      <to>sequence for aliquotes</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sequence for aliquotes</from>
-      <to>Create Aliquote Labels</to>
+      <from>unique derivatives</from>
+      <to>create derivative labels</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Add Lineage aliquot</name>
+    <name>add lineage derivative</name>
     <type>Constant</type>
     <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Lineage</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Aliquot</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1440</xloc>
-      <yloc>432</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Add Lineage derivative</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -600,13 +521,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1472</xloc>
-      <yloc>32</yloc>
+      <xloc>1051</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Aliquotes input</name>
+    <name>aliquots input</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -623,33 +544,33 @@
     <separator>,</separator>
     <enclosure>"</enclosure>
     <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
+    <buffer_size>500000000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
+    <format>Unix</format>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <name>AliquotNum</name>
         <type>Integer</type>
-        <format>#</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>SampleNum</name>
         <type>Integer</type>
-        <format>#</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -667,11 +588,11 @@
       <field>
         <name>AliquotSampComp</name>
         <type>Integer</type>
-        <format>#</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -682,73 +603,73 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>AliquotBarCode</name>
         <type>Integer</type>
-        <format>#</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>AliquotConc</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
-        <precision>2</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>AliquotVolume</name>
         <type>Integer</type>
-        <format>#</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>AliquotLocation</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>String</type>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>AliquotBoxNumber</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>String</type>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>AliquotShelfNumber</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>String</type>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -759,18 +680,18 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>3</length>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>AliquotPositionNumber</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>String</type>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -781,18 +702,18 @@
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>19</length>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>SampleExhausted</name>
         <type>Integer</type>
-        <format>#</format>
+        <format/>
         <currency>Rs.</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
+        <length>-1</length>
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
@@ -817,484 +738,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Alter column names</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Specimen Label</name>
-        <rename>Parent Specimen Label</rename>
-      </field>
-      <field>
-        <name>Type</name>
-        <rename/>
-      </field>
-      <field>
-        <name>AliquotDate</name>
-        <rename>Processing Event#Date and Time</rename>
-      </field>
-      <field>
-        <name>AliquotBarCode</name>
-        <rename>Barcode</rename>
-      </field>
-      <field>
-        <name>AliquotConc</name>
-        <rename>Concentration</rename>
-      </field>
-      <field>
-        <name>AliquotVolume</name>
-        <rename>Initial Quantity</rename>
-      </field>
-      <field>
-        <name>AliquotComments</name>
-        <rename>Comments</rename>
-      </field>
-      <field>
-        <name>AliquotNum</name>
-        <rename/>
-      </field>
-      <field>
-        <name>SampleExhausted</name>
-        <rename/>
-      </field>
-      <field>
-        <name>AliquotSampUnits</name>
-        <rename/>
-      </field>
-      <field>
-        <name>result</name>
-        <rename/>
-      </field>
-      <field>
-        <name>ShortDesc</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>Processing Event#Date and Time</name>
-        <rename>Processing Event#Date and Time</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM/dd/yyyy HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>create the derivative labels</name>
-    <type>ConcatFields</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>.</separator>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name/>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>Parent Specimen Label</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>ShortDesc</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>result</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <ConcatFields>
-      <targetFieldName>Specimen Label</targetFieldName>
-      <targetFieldLength>0</targetFieldLength>
-      <removeSelectedFields>N</removeSelectedFields>
-    </ConcatFields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Create Aliquote Labels</name>
-    <type>ConcatFields</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>.</separator>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name/>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>Parent Specimen Label</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>ShortDesc</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Result</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <ConcatFields>
-      <targetFieldName>Specimen Label</targetFieldName>
-      <targetFieldLength>0</targetFieldLength>
-      <removeSelectedFields>N</removeSelectedFields>
-    </ConcatFields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1136</xloc>
-      <yloc>432</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get unique derivative labels</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>Specimen Label</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1200</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Lookup for sample number</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>primary spec output input</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>SampleNum</name>
-        <field>SampNum</field>
-      </key>
-      <value>
-        <name>CP Short Title</name>
-        <rename>CP Short Title</rename>
-        <default/>
-        <type>None</type>
-      </value>
-      <value>
-        <name>Visit Name</name>
-        <rename>Visit Name</rename>
-        <default/>
-        <type>None</type>
-      </value>
-      <value>
-        <name>Specimen Label</name>
-        <rename>Parent Specimen Label</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>112</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sample type</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>cSampComp input</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>AliquotSampComp</name>
-        <field>Code</field>
-      </key>
-      <value>
-        <name>Description</name>
-        <rename>Type</rename>
-        <default/>
-        <type>None</type>
-      </value>
-      <value>
-        <name>ShortDesc</name>
-        <rename>ShortDesc</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows based on parent specimen Labels and types</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>Y</unique_rows>
-    <fields>
-      <field>
-        <name>Specimen Label</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>Type</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>32</yloc>
+      <xloc>75</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1367,149 +812,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>cchmc aliquotes</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>,</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>Y</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>/home/krishagni/Desktop/cchmc/output/cchmc-aliquotes</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
-    <fields>
-      <field>
-        <name>Specimen Label</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Barcode</name>
-        <type>Integer</type>
-        <format>0</format>
-        <currency>Rs.</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Type</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Lineage</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Parent Specimen Label</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Comments</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Processing Event#Date and Time</name>
-        <type>Date</type>
-        <format>MM-dd-yyyy</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1712</xloc>
-      <yloc>272</yloc>
+      <xloc>315</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1532,7 +836,7 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -1615,18 +919,6 @@
         <length>-1</length>
         <precision>-1</precision>
       </field>
-      <field>
-        <name>SampleNum</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1637,13 +929,141 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1712</xloc>
-      <yloc>144</yloc>
+      <xloc>619</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>primary spec output input</name>
+    <name>create derivative labels</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>.</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>Parent Specimen Label</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ShortDesc</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>Derivative Label</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1051</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get primary PSL</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>primary specimens output</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>SampleNum</name>
+        <field>SampNum</field>
+      </key>
+      <value>
+        <name>Specimen Label</name>
+        <rename>Parent Specimen Label</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>75</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>primary specimens output</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1865,63 +1285,45 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
+      <xloc>75</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>rearrange</name>
-    <type>SelectValues</type>
+    <name>sample type</name>
+    <type>StreamLookup</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-      <field>
-        <name>Specimen Label</name>
-      </field>
-      <field>
-        <name>Barcode</name>
-      </field>
-      <field>
-        <name>Type</name>
-      </field>
-      <field>
-        <name>Lineage</name>
-      </field>
-      <field>
-        <name>Parent Specimen Label</name>
-      </field>
-      <field>
-        <name>Comments</name>
-      </field>
-      <field>
-        <name>Processing Event#Date and Time</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>Processing Event#Date and Time</name>
-        <rename>Processing Event#Date and Time</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>MM-dd-yyyy</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
+    <from>cSampComp input</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>AliquotSampComp</name>
+        <field>Code</field>
+      </key>
+      <value>
+        <name>Description</name>
+        <rename>Type</rename>
+        <default/>
+        <type>None</type>
+      </value>
+      <value>
+        <name>ShortDesc</name>
+        <rename>ShortDesc</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1931,16 +1333,16 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1712</xloc>
-      <yloc>432</yloc>
+      <xloc>315</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>rearrange all fields </name>
+    <name>select and alter column names</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1949,7 +1351,8 @@
     </partitioning>
     <fields>
       <field>
-        <name>Specimen Label</name>
+        <name>Derivative Label</name>
+        <rename>Specimen Label</rename>
       </field>
       <field>
         <name>Type</name>
@@ -1963,6 +1366,9 @@
       <field>
         <name>AliquotDate</name>
         <rename>Processing Event#Date and Time</rename>
+      </field>
+      <field>
+        <name>AliquotNum</name>
       </field>
       <field>
         <name>SampleNum</name>
@@ -1995,31 +1401,45 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1712</xloc>
-      <yloc>32</yloc>
+      <xloc>1051</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>sequence for derivative labels</name>
-    <type>FieldsChangeSequence</type>
+    <name>sort rows based on sampNum and ShortDesc</name>
+    <type>SortRows</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <start>1</start>
-    <increment>1</increment>
-    <resultfieldName>result</resultfieldName>
+    <directory>/home/krishagni/Desktop/cchmc/testing</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory>100</free_memory>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>Parent Specimen Label</name>
+        <name>SampleNum</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
       <field>
         <name>ShortDesc</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <attributes/>
@@ -2031,14 +1451,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>144</yloc>
+      <xloc>619</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>sequence for aliquotes</name>
-    <type>FieldsChangeSequence</type>
+    <name>unique derivatives</name>
+    <type>Unique</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2047,15 +1467,18 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <start>1</start>
-    <increment>1</increment>
-    <resultfieldName>result</resultfieldName>
+    <count_rows>N</count_rows>
+    <count_field/>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
     <fields>
       <field>
         <name>Parent Specimen Label</name>
+        <case_insensitive>N</case_insensitive>
       </field>
       <field>
         <name>ShortDesc</name>
+        <case_insensitive>N</case_insensitive>
       </field>
     </fields>
     <attributes/>
@@ -2067,8 +1490,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
-      <yloc>432</yloc>
+      <xloc>619</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
